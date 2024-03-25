@@ -2,6 +2,7 @@ import {CORE_CONCEPTS} from './data';
 import Header from "./components/Header";
 import CoreConcept from "./components/CoreConcept";
 import TabButton from './components/TabButton'
+import {EXAMPLES} from "./data";
 
 import {useState} from "react"; // all functions use... are react hooks, called inside component fns/hooks on top-level
 
@@ -9,7 +10,8 @@ import {useState} from "react"; // all functions use... are react hooks, called 
 
 
 function App() {
-    const [selectedTopic, setSelectedTopic] = useState('Please click a button');  // returns stateArray of size 2
+    // const [selectedTopic, setSelectedTopic] = useState('Please click a button');  // returns stateArray of size 2
+    const [selectedTopic, setSelectedTopic] = useState('components');  // initial state doesn't have data in data.js
     // let tabContent = 'Please click a button'
     function handleSelect(selectedButton) {
         // Components, JSX, props, state
@@ -46,13 +48,20 @@ function App() {
                     <h2>Examples</h2>
                     <menu>
                         {/*<li><button></button></li>*/}
-                        <TabButton onClick={()=>handleSelect('Components')}>Components</TabButton>
-                        <TabButton onClick={()=>handleSelect('JSX')}>JSX</TabButton>
+                        <TabButton onClick={()=>handleSelect('components')}>Components</TabButton>
+                        <TabButton onClick={()=>handleSelect('jsx')}>JSX</TabButton>
                         <TabButton onClick={()=>handleSelect('props')}>Props</TabButton>
                         <TabButton onClick={()=>handleSelect('state')}>State</TabButton>
                     </menu>
                     {/*{tabContent}*/}
-                    {selectedTopic}
+                    {/*{selectedTopic}*/}
+                    <div id="tab-content" >
+                        <h3>{EXAMPLES[selectedTopic].title}</h3>
+                        <p>{EXAMPLES[selectedTopic].description}</p>
+                        <pre>
+                            <code>{EXAMPLES[selectedTopic].code}</code>
+                        </pre>
+                    </div>
                 </section>
             </main>
         </div>
