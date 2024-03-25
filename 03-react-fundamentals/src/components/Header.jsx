@@ -1,6 +1,7 @@
 import someImg from '../assets/react-core-concepts.png';
 // path gets changed
 // this value is present even after build without getting lost
+import './Header.css';
 
 const reactDescriptions = ['Fundamental', 'Crucial', 'Core'];
 function getRandomInt(max) { // 0 to max inclusive
