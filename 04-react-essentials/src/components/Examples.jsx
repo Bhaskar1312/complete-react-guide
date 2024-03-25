@@ -32,7 +32,10 @@ export default function Examples() {
     return (
         <Section id="examples">
             <h2>Examples</h2>
-            <Tabs buttons={
+            <Tabs
+                // buttonsContainer={Section} // for custom components
+                buttonsContainer="menu"
+                buttons={
                 <>
                 <TabButton
                     isSelected={selectedTopic === 'components'}
