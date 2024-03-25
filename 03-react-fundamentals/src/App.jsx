@@ -1,6 +1,7 @@
 import {CORE_CONCEPTS} from './data';
 import Header from "./components/Header";
 import CoreConcept from "./components/CoreConcept";
+import TabButton from './components/TabButton'
 
 // use capital letters for component like App and return render-able HTML
 
@@ -26,6 +27,16 @@ function App() {
                         {/*export default function CoreConcept({ concept }) {}*/}
                         {/*export default function Button({ caption, type = "submit" }) {} default val during obj destructuring*/}
                         </ul>
+                </section>
+                <section id="examples">
+                    <h2>Examples</h2>
+                    <menu>
+                        {/*<li><button></button></li>*/}
+                        <TabButton>Components</TabButton>
+                        <TabButton>JSX</TabButton>
+                        <TabButton>Props</TabButton>
+                        <TabButton>State</TabButton>
+                    </menu>
                 </section>
             </main>
         </div>
