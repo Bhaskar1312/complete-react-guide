@@ -5,7 +5,7 @@
 //     return (<li><button>{props.children}</button></li>);
 // }
 
-export default function TabButton({children, onClick}) { // just onSelect/click instead of onClick here
+export default function TabButton({children, onClick, isSelected}) { // just onSelect/click instead of onClick here
     // children refers to the content between <TabButton>content</TabButton>
 
     function handleClick() { // unused fn
@@ -18,7 +18,8 @@ export default function TabButton({children, onClick}) { // just onSelect/click 
     // in react, use on...
     return (<li>
         {/*<button onClick={handleClick}>{children}</button>*/}
-        <button onClick={onClick}>{children}</button>
+        <button className={isSelected?"active":""} onClick={onClick}>{children}</button>
+    {/*    set to undefined or "" if not active */}
     {/*    dont add parenthesis after handleClick */}
     </li>);
 }
