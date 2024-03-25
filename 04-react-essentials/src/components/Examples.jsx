@@ -34,7 +34,7 @@ export default function Examples() {
             <h2>Examples</h2>
             <Tabs
                 // buttonsContainer={Section} // for custom components
-                buttonsContainer="menu"
+                // buttonsContainer="menu"
                 buttons={
                 <>
                 <TabButton
