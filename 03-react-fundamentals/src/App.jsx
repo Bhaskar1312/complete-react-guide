@@ -1,5 +1,5 @@
 import someImg from './assets/react-core-concepts.png';
-import componentsImg from './assets/config.png';
+import {CORE_CONCEPTS} from "./data";
 
 // this value is present even after build without getting lost
 
@@ -26,9 +26,11 @@ function Header() {
 }
 
 function CoreConcept(props) {
+    // or use function CoreConcept({image, title, description}) object destructuring and use those instead of props
     return (
         <li>
             <img src={props.image} alt="Image not found" />
+            {/*<img src={image} alt="Image not found" />*/}
             <h3>{props.title}</h3>
             <p>{props.description}</p>
         </li>
@@ -43,14 +45,18 @@ function App() {
                     <h2>Time to get started!</h2>
                     <ul>
                         <CoreConcept
-                            title="Components"
-                            description="The core UI building block"
-                            image={componentsImg}
+                            title={CORE_CONCEPTS[0].title}
+                            description={CORE_CONCEPTS[0].description}
+                            image={CORE_CONCEPTS[0].image}
                         />
-                        <CoreConcept title="Props"
-                                     description="The core UI building block2"
-                                     image={componentsImg}/>
-                    </ul>
+                        <CoreConcept {...CORE_CONCEPTS[1]} />
+                        {/*    they will be added as key/val pairs using spread operator */}
+                        <CoreConcept {...CORE_CONCEPTS[2]} />
+                        <CoreConcept {...CORE_CONCEPTS[3]} />
+                        {/*<CoreConcept concept={CORE_CONCEPTS[0]} />*/}
+                        {/*export default function CoreConcept({ concept }) {}*/}
+                        {/*export default function Button({ caption, type = "submit" }) {} default val during obj destructuring*/}
+                        </ul>
                 </section>
             </main>
         </div>
