@@ -17,6 +17,7 @@ function App() {
             return {
                 ...prevUserInput,
                 [inputIdentifier]: +newValue,
+            //     add + so that string(by default) is converted to number
             };
         })
     }
