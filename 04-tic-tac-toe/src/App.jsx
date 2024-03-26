@@ -4,18 +4,22 @@ import {useState} from "react";
 import Log from "./components/Log.jsx";
 
 function App() {
+    function deriveActivePlayer(gameTurns) {
+        let currentPlayer = 'X';
+        if(gameTurns.length>0 && gameTurns[0].player==='X') {
+            currentPlayer = 'O';
+        }
+        return currentPlayer;
+    }
     const [gameTurns, setGameTurns] = useState([]);
-    const [activePlayer, setActivePlayer] = useState('X');
+    // const [activePlayer, setActivePlayer] = useState('X'); // redundant, state can be derived from gameTurns
     // common state for both Player,GameBoard =lifting state up
-
+    const activePlayer = deriveActivePlayer(gameTurns);
     function handleSelectSquare(rowIndex, colIndex) {
-        setActivePlayer((currActivePlayer)=>currActivePlayer==='X'?'O':'X');
-        setGameTurns((prevTurns)=>{
-            let currentPlayer = 'X';
+        // setActivePlayer((currActivePlayer)=>currActivePlayer==='X'?'O':'X');
 
-            if(prevTurns.length>0 && prevTurns[0].player==='X') {
-                currentPlayer = 'O';
-            }
+        setGameTurns((prevTurns)=>{
+            let currentPlayer = deriveActivePlayer(prevTurns);
 
             const updatedTurns = [
                 {square: {row: rowIndex, col: colIndex}, player: currentPlayer}, // we can use activePlayer but that would be merging two states
