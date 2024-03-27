@@ -17,17 +17,22 @@ export default function TimerChallenge({title, targetTime}) {
 
     if(timeRemaining <=0) {
         handleStop(); //setInterval won't stop on its own
-        setTimeRemaining(targetTime*1000);// be careful about setting state, this may well execute infinite times, not in this case because of if
+        // setTimeRemaining(targetTime*1000);// be careful about setting state, this may well execute infinite times, not in this case because of if
     }
 
     function handleStop() {
         clearInterval(timer.current);
         dialog.current.open();
+        // setTimeRemaining(targetTime*1000);
+    }
+
+    function handleReset() {
+        setTimeRemaining(targetTime*1000)
     }
 
     return (
         <>
-        <ResultModal ref={dialog} targetTime={targetTime} result="lost"/>
+        <ResultModal ref={dialog} targetTime={targetTime} timeRemaining={timeRemaining} onReset={handleReset}/>
         <section className="challenge">
             <h2>{title}</h2>
             {/*{timerExpired && <p>You lost! </p>}*/}
