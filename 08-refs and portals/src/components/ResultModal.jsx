@@ -11,7 +11,7 @@ const ResultModal = forwardRef( function ResultModal({timeRemaining, targetTime,
     })
     timeRemaining = (timeRemaining/1000.0).toFixed(2);
     const score = Math.round((1 - timeRemaining/targetTime)*100);
-    return (<dialog ref={dialog} className="result-modal" >
+    return (<dialog ref={dialog} className="result-modal" onClose={onReset}>
         {/*built-in dialog buy default is not visible, so open in <dialog className="result-modal" open>
         but doing it directly won't blur the background and we need to pass ref*/}
         <h2>You {timeRemaining>0? "won":"lost"}</h2>
