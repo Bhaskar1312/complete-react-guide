@@ -1,19 +1,19 @@
-import {useState} from "react";
+import {useRef, useState} from "react";
 
 export default function TimerChallenge({title, targetTime}) {
     const [timerExpired, setTimerExpired] = useState(false);
     const [timerStarted, setTimerStarted] = useState(false);
 
-    let timer;
+    const timer = useRef(); // store state, but wouldn't cause react to re-execute DOM again
     function handleStart() {
         setTimerStarted(true);// this can also be set after setTimeout instead
-        timer = setTimeout(()=> {
-            setTimerExpired(true)
+        timer.current = setTimeout(()=> {
+            setTimerExpired(true);
         }, targetTime*1000)
     }
 
     function handleStop() {
-        clearTimeout(timer);
+        clearTimeout(timer.current);
         setTimerStarted(false);
     }
 
