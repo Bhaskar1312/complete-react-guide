@@ -1,8 +1,9 @@
 import { calculateInvestmentResults, formatter } from '../util/investment.js';
 
-const results = [];
+// const results = []; // when executed twice(dev) by StrictMode, the results in calculateInvestmentResults get appended
 
 export default function Results({ input }) {
+    const results = [];
     calculateInvestmentResults(input, results);
 
     if (results.length === 0) {
