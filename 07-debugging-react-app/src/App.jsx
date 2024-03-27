@@ -12,11 +12,11 @@ function App() {
     duration: 10,
   });
 
-  function handleChange(inputIdentifier, newValue) {
+  function handleChange(inputIdentifier, newValue) { // while debugging you will see newValue as string
     setUserInput((prevUserInput) => {
       return {
         ...prevUserInput,
-        [inputIdentifier]: newValue,
+        [inputIdentifier]: +newValue,
       };
     });
   }
