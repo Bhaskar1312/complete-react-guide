@@ -1,6 +1,15 @@
-import {forwardRef} from "react";
+import {forwardRef, useImperativeHandle, useRef} from "react";
+
 const ResultModal = forwardRef( function ResultModal({result, targetTime}, ref) {
-    return (<dialog ref={ref} className="result-modal" open>
+    const dialog = useRef();
+    useImperativeHandle(ref, ()=>{
+        return {
+            open() {
+                dialog.current.showModal();
+            }
+        }
+    })
+    return (<dialog ref={dialog} className="result-modal" >
         {/*built-in dialog buy default is not visible, so open in <dialog className="result-modal" open>
         but doing it directly won't blur the background and we need to pass ref*/}
         <h2>You {result}</h2>
