@@ -1,4 +1,5 @@
 import {forwardRef, useImperativeHandle, useRef} from "react";
+import {createPortal} from "react-dom";
 
 const ResultModal = forwardRef( function ResultModal({timeRemaining, targetTime, onReset}, ref) {
     const dialog = useRef();
@@ -11,7 +12,7 @@ const ResultModal = forwardRef( function ResultModal({timeRemaining, targetTime,
     })
     timeRemaining = (timeRemaining/1000.0).toFixed(2);
     const score = Math.round((1 - timeRemaining/targetTime)*100);
-    return (<dialog ref={dialog} className="result-modal" onClose={onReset}>
+    return createPortal((<dialog ref={dialog} className="result-modal" onClose={onReset}>
         {/*built-in dialog buy default is not visible, so open in <dialog className="result-modal" open>
         but doing it directly won't blur the background and we need to pass ref*/}
         <h2>You {timeRemaining>0? "won":"lost"}</h2>
@@ -22,7 +23,7 @@ const ResultModal = forwardRef( function ResultModal({timeRemaining, targetTime,
             <button>Close</button>
         {/*    this closes the dialog - browser stuff, not react*/}
         </form>
-    </dialog>)
+    </dialog>), document.getElementById("modal")); // teleport to modal div for accessibility or some other element doesn't block it
 }
 )
 export default ResultModal;
