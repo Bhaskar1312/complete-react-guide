@@ -7,6 +7,7 @@ export default function Player() {
     function handleSubmit() {
         console.log(playerName.current)
         setEnteredPlayerName(playerName.current.value);
+        playerName.current.value = ''; // set enteredPlayerName to empty via DOM manipulation(not good practice)
     }
   return (
     <section id="player">
