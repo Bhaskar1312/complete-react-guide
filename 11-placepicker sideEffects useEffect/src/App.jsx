@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import {useEffect, useRef, useState} from 'react';
 
 import Places from './components/Places.jsx';
 import { AVAILABLE_PLACES } from './data.js';
@@ -7,21 +7,43 @@ import DeleteConfirmation from './components/DeleteConfirmation.jsx';
 import logoImg from './assets/logo.png';
 import {sortPlacesByDistance} from "./loc.js";
 
+const storedIds = JSON.parse(localStorage.getItem('selectedPlaces')) || [];
+const storedPlaces = storedIds.map(
+    (id) =>AVAILABLE_PLACES.find((place) => place.id===id)
+);
+console.log(storedPlaces); //
+
 function App() {
   const modal = useRef();
   const selectedPlace = useRef();
-  const [pickedPlaces, setPickedPlaces] = useState([]);
 
   const [availablePlaces, setAvailablePlaces] = useState(AVAILABLE_PLACES);
-  navigator.geolocation.getCurrentPosition((position) => {
-    const sortedPlaces = sortPlacesByDistance(AVAILABLE_PLACES,
-        position.coords.latitude,
-        position.coords.longitude
-    );
-    setAvailablePlaces(AVAILABLE_PLACES); // when component renders it fetches userLocation and updates state,
-    // when state is updated, component is rendered again - infinite loop
 
-  });
+  // useEffect(()=> { // infinite loop if useEffect is used
+  // const storedIds = JSON.parse(localStorage.getItem('selectedItems')) || [];
+  // const storedPlaces = storedIds.map(
+  //     (id) =>AVAILABLE_PLACES.find((place) => place.id===id)
+  // );
+  //   setPickedPlaces(storedPlaces);
+  // });
+
+  const [pickedPlaces, setPickedPlaces] = useState(storedPlaces);
+
+
+  useEffect(()=>{
+    // navigator is provided by the browser
+    navigator.geolocation.getCurrentPosition((position) => {
+      const sortedPlaces = sortPlacesByDistance(AVAILABLE_PLACES,
+          position.coords.latitude,
+          position.coords.longitude
+      );
+      setAvailablePlaces(sortedPlaces); // when component renders it fetches userLocation and updates state,
+      // when state is updated, component is rendered again - infinite loop
+
+    });
+  }, []);
+
+
   function handleStartRemovePlace(id) {
     modal.current.open();
     selectedPlace.current = id;
@@ -39,6 +61,16 @@ function App() {
       const place = AVAILABLE_PLACES.find((place) => place.id === id);
       return [place, ...prevPickedPlaces];
     });
+
+    // the below code can also be part of useEffect, but useEffect(or hooks cant be called from inside normal functions)
+    // localStorage is another browser function which stores in string format
+    const storedIds = JSON.parse(localStorage.getItem('selectedPlaces')) || [];
+    console.log(storedIds);
+    if(storedIds.indexOf(id) === -1) {
+      console.log(id);
+      localStorage.setItem('selectedPlaces', JSON.stringify([id, ...storedIds]));
+    }
+
   }
 
   function handleRemovePlace() {
@@ -46,6 +78,9 @@ function App() {
       prevPickedPlaces.filter((place) => place.id !== selectedPlace.current)
     );
     modal.current.close();
+
+    const storeIds = JSON.parse(localStorage.getItem('selectedItems')) || [];
+    localStorage.setItem('selectedItems', JSON.stringify(storeIds.filter((id)=>id!==selectedPlace.current)))
   }
 
   return (
