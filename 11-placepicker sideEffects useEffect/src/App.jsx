@@ -5,12 +5,23 @@ import { AVAILABLE_PLACES } from './data.js';
 import Modal from './components/Modal.jsx';
 import DeleteConfirmation from './components/DeleteConfirmation.jsx';
 import logoImg from './assets/logo.png';
+import {sortPlacesByDistance} from "./loc.js";
 
 function App() {
   const modal = useRef();
   const selectedPlace = useRef();
   const [pickedPlaces, setPickedPlaces] = useState([]);
 
+  const [availablePlaces, setAvailablePlaces] = useState(AVAILABLE_PLACES);
+  navigator.geolocation.getCurrentPosition((position) => {
+    const sortedPlaces = sortPlacesByDistance(AVAILABLE_PLACES,
+        position.coords.latitude,
+        position.coords.longitude
+    );
+    setAvailablePlaces(AVAILABLE_PLACES); // when component renders it fetches userLocation and updates state,
+    // when state is updated, component is rendered again - infinite loop
+
+  });
   function handleStartRemovePlace(id) {
     modal.current.open();
     selectedPlace.current = id;
@@ -63,7 +74,7 @@ function App() {
         />
         <Places
           title="Available Places"
-          places={AVAILABLE_PLACES}
+          places={availablePlaces}
           onSelectPlace={handleSelectPlace}
         />
       </main>
