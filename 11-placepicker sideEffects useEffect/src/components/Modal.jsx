@@ -15,7 +15,7 @@ function Modal({ open, children, onClose }) {
   return createPortal(
     <dialog className="modal" ref={dialog} onClose={onClose}>
       {/*onClose for setting card to close when ESC is pressed */}
-      {children}
+      {open? children:null}
     </dialog>,
     document.getElementById('modal')
   );
