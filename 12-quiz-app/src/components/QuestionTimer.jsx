@@ -5,7 +5,10 @@ export default function QuestionTimer({timeout, onTimeout}) {
 
     useEffect(() => {
         console.log('set timeout'); // strict mode calls every component twice in main.jsx
-        setTimeout(onTimeout, timeout);
+        const timer = setTimeout(onTimeout, timeout);
+        return ()=>{
+            clearTimeout(timer);
+        }
     },
         [timeout, onTimeout]); // onTimeout is a function(functions are not equal), hence executing every time
 
@@ -14,7 +17,10 @@ export default function QuestionTimer({timeout, onTimeout}) {
     useEffect(()=>{
         console.log('set interval');
        const interval = setInterval(()=>setRemainingTime(prevTime => prevTime-100), 100);
-       // return clearInterval(interval);
+
+       return ()=>{
+           clearInterval(interval);
+       }
     }, []); // Empty array ensures the effect runs only once
 
     return (
