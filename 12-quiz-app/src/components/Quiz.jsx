@@ -15,7 +15,10 @@ export default function Quiz() {
         setUserAnswers(prevAnswers => [...prevAnswers,  selectedAnswer]);
     }, []);
 
-    const handleSkipAnswer = useCallback(()=> handleSelectAnswer(null), [handleSelectAnswer]);
+    const handleSkipAnswer = useCallback(
+        ()=> handleSelectAnswer(null),
+        [handleSelectAnswer]
+    );
 
     if(quizIsComplete) {
         return (

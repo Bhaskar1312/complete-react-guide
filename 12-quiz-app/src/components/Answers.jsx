@@ -28,7 +28,7 @@ export default function Answers(
                         <button
                             className={cssClass}
                             onClick={()=>handleSelectAnswer(answer)}
-
+                            disabled={answerState !==''}
                         >
                             {answer}</button>
                     </li>)

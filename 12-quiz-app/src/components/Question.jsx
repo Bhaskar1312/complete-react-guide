@@ -16,6 +16,14 @@ export default function Question({
         isCorrect: null
     });
 
+    let timer = 10000;
+    if(answer.selectedAnswer) {
+        timer = 1000;
+    }
+    if(answer.isCorrect !==null) {
+        timer = 2000;
+    }
+
     function handleSelectAnswer(answer) {
         setAnswer({
             selectedAnswer: answer,
@@ -45,8 +53,11 @@ export default function Question({
     return (
         <div id="question">
             <QuestionTimer
-                timeout={10000}
-                onTimeout={onSkipAnswer}/>
+                key={timer} // to destroy and recreate with key
+                timeout={timer}
+                onTimeout={answer.selectedAnswer ==='' ? onSkipAnswer:null} // skip when no ans is selected
+                mode={answerState} // for color change of progress bar
+            />
             <h2>{QUESTIONS[index].text}</h2>
             <Answers
                 answers={QUESTIONS[index].answers}
