@@ -1,7 +1,12 @@
-import QUESTIONS from "../questions.js";
 import {useRef} from "react";
 
-export default function Answers({answers, selectedAnswer, answerState, onSelect: handleSelectAnswer}) {
+export default function Answers(
+    {   answers,
+        selectedAnswer,
+        answerState,
+        onSelect: handleSelectAnswer}
+) {
+
     const shuffledAnswers = useRef(); // not change the element
     if(!shuffledAnswers.current) { // only when undefined, shuffle the array
         shuffledAnswers.current = [...answers];
@@ -22,7 +27,9 @@ export default function Answers({answers, selectedAnswer, answerState, onSelect:
                     return (<li key={answer} className="answer">
                         <button
                             className={cssClass}
-                            onClick={()=>handleSelectAnswer(answer)}>
+                            onClick={()=>handleSelectAnswer(answer)}
+
+                        >
                             {answer}</button>
                     </li>)
                 }
