@@ -4,6 +4,7 @@ import {useEffect, useState} from "react";
 export default function AvailablePlaces({ onSelectPlace }) {
   const [availablePlaces, setAvailablePlaces] = useState([]);
   const [isFetching, setIsFetching] = useState(false);
+  const [error, setError] = useState()
 
   // cant use await as AvailablePlaces is not async,
   // fetch('http://localhost:3000/places')
@@ -20,15 +21,34 @@ export default function AvailablePlaces({ onSelectPlace }) {
 
     async function fetchPlaces() {
       setIsFetching(true);
-      const response = await fetch('http://localhost:3000/places');
-      const respData = await response.json();
-      setAvailablePlaces(respData.places);
+      try {
+        const response = await fetch('http://localhost:3000/placess');
+
+        const respData = await response.json();
+        if (!response.ok) {
+          throw new Error('Failed to fetch places');
+        }
+        setAvailablePlaces(respData.places);
+      } catch (error) {
+        setError({
+          message:
+              error.message || 'Could not fetch places, please try again later.',
+        });
+      }
       setIsFetching(false);
     }
     fetchPlaces();
     // use slow throttling
 
   }, []); // only once render
+
+  if (error) {
+    return <p title="An error occurred!">{error.message}</p>;
+  }
+  // if (error) {
+  //   return <Error title="An error occurred!" message={error.message} />;
+  // }
+
 
   return (
     <Places
