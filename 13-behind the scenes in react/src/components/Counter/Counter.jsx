@@ -28,7 +28,8 @@ function isPrime(number) {
 }
 
 // use memo, if component is higher up the component tree depends on property that doesn't change much
-const Counter = memo(function Counter({ initialCount }) { // Lets you skip re-rendering a component when its props are unchanged
+// const Counter = memo(
+function Counter({ initialCount }) { // Lets you skip re-rendering a component when its props are unchanged
   log('<Counter /> rendered', 1);
   const initialCountIsPrime = isPrime(initialCount);
 
@@ -59,6 +60,7 @@ const Counter = memo(function Counter({ initialCount }) { // Lets you skip re-re
       </p>
     </section>
   );
-});
+}
+// );
 
 export default Counter;
