@@ -19,6 +19,7 @@ function App() {
       <Header />
       <main>
         <ConfigureCounter onSet={handleSetCount}/>
+        <Counter key={chosenCount} initialCount={chosenCount} />{/*  By choosing key, this will get reexceuted */}
         <Counter initialCount={chosenCount} />
       </main>
     </>
