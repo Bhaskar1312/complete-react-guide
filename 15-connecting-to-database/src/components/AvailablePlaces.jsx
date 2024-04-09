@@ -13,9 +13,18 @@ export default function AvailablePlaces({ onSelectPlace }) {
 
   useEffect(()=>{
     // cant use await as AvailablePlaces is not async,
-    fetch('http://localhost:3000/places')
-        .then((res)=> res.json()) // again promise
-        .then((respData)=> setAvailablePlaces(respData.places))
+    // fetch('http://localhost:3000/places')
+    //     .then((res)=> res.json()) // again promise
+    //     .then((respData)=> setAvailablePlaces(respData.places))
+
+    async function fetchPlaces() {
+      const response = await fetch('http://localhost:3000/places');
+      const respData = await response.json();
+      setAvailablePlaces(respData.places);
+    }
+    fetchPlaces();
+    // use slow throttling
+
   }, []); // only once render
 
   return (
