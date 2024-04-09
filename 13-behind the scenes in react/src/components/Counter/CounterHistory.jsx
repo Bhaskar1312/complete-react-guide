@@ -24,7 +24,9 @@ export default function CounterHistory({ history }) {
   return (
     <ol>
       {history.map((count, index) => (
-        <HistoryItem key={index} count={count} />
+        // <HistoryItem key={index} count={count.value} /> // you can remove index if this line is commented and when this line is used, whole unordered list changes instead of just the first ele
+        <HistoryItem key={count.id} count={count.value} />
+      // what if random key generated is equal?, key helps to highlight the selected element only instead of always 2nd ele
       ))}
     </ol>
   );
