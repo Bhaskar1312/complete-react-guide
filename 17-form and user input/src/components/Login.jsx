@@ -1,6 +1,10 @@
 export default function Login() {
+    function handleSubmit(event) {
+        event.preventDefault(); // prevent default generate and send http request
+        console.log('Submitted!')
+    }
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <h2>Login</h2>
 
       <div className="control-row">
@@ -17,7 +21,11 @@ export default function Login() {
 
       <p className="form-actions">
         <button className="button button-flat">Reset</button>
-        <button className="button">Login</button>
+        <button className="button" >Login</button>
+        {/*<button className="submit" type="submit" onClick={handleSubmit}>Login</button>*/}
+        {/*  default is submit, when browser, it sends a request; setting to button type won't */}
+        {/*<button className="submit" type="button">Login</button>*/}
+      {/*    add onSubmit on form instead of onCLick on button*/}
       </p>
     </form>
   );
