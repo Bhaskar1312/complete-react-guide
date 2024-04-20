@@ -1,6 +1,19 @@
 export default function Signup() {
+    function handleSubmit(event) {
+        event.preventDefault();
+
+        const formData = new FormData(event.target) ;// FormData is a browser built-in object that allows you to create key-value pairs that represent form fields and their values.
+        // for above to work, all inputs in form must have name attribute
+        // const enteredEmail = formData.get('email');
+        // const enteredPassword = formData.get('password');
+        const acquisitionChannel = formData.getAll('acquisition');
+        const data = Object.fromEntries(formData.entries()); //formData.entries() key/val array - so checkbox entries are lost
+        data.acquisition = acquisitionChannel;
+        console.log(data);
+
+    }
     return (
-        <form>
+        <form onSubmit={handleSubmit}>
             <h2>Welcome on board!</h2>
             <p>We just need a little bit of data from you to get you started 🚀</p>
 
