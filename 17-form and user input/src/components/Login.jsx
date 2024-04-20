@@ -7,6 +7,7 @@ export default function Login() {
 
     function handleSubmit(event) {
         event.preventDefault(); // prevent default generate and send http request
+        // The event.preventDefault() method is used to stop the default action of an event from happening. In the context of a form submission, the default action is to send a GET or POST request to the URL specified in the form's action attribute and then refresh the page.
 
         const enteredEmail = email.current.value; // current is a property of ref, value is a property of input
         const enteredPassword = password.current.value;
