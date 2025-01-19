@@ -29,3 +29,6 @@ tanstack V5 (@beta if v5 is not available)
 (images still need to refetched, images are fetched and cached by browser potentially, react-query is not involved)
 // staleTime param to how long to wait before such event, default is 0 ms.
 
+// react-query sends default query param to useQuery, hence recentEvents is getting [object, object]
+
+//  react-query sends  {queryKey: Array(1), meta: undefined} // signal: AbortSignal abort req if we leave page

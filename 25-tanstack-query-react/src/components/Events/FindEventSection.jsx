@@ -14,7 +14,8 @@ export default function FindEventSection() {
     queryKey: ['events', {search: searchTerm}], // pass an extra key/ob to not use same events key
     // but refs searchElement.current.value dont cause to re-render, so use useState to store search term
 
-    queryFn: () => fetchEvents(searchTerm), // but dont call it before user submits
+    queryFn: ({signal}) => fetchEvents({signal, searchTerm}), // but dont call it before user submits
+    // set property searchTerm
 
   });
 
