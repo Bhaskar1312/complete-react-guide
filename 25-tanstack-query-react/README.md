@@ -6,3 +6,16 @@ Currently, two official plugins are available:
 
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+
+> npm i
+> cd backend
+> npm i
+> npm start
+New terminal
+> npm run dev
+
+When switching to another tab and coming back, we want to refresh lets say
+caching once fetched is cached, reused again and fetch the new data in background 
+> npm i @tanstack/react-query
+tanstack V5 (@beta if v5 is not available)
